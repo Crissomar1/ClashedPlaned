@@ -5,16 +5,12 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from tabulate import tabulate
 import opendatasets as od
-import kaggle
 
-os.environ['KAGGLE_USERNAME'] = "crissomar1"
-os.environ['KAGGLE_KEY'] = "caf9604aa279620109b1cba4cca07226"
+
 def get_data():
-    #response = requests.get('https://www.kaggle.com/datasets/nguyenhoc/plane-crash/download?datasetVersionNumber=1')
-    api = kaggle.KaggleApi()
-    api.authenticate()
-    #soup = BeautifulSoup(response.content, 'html.parser')
-    #data = pd.read_csv(io.StringIO(soup.decode('utf-8')))
+    response = requests.get('https://github.com/Crissomar1/ClashedPlaned/blob/Tarea-1/planecrashinfo_20181121001952.csv')
+    soup = BeautifulSoup(response.content, 'html.parser')
+    data = pd.read_csv(io.StringIO(soup.decode('utf-8')))
     return pd.read_csv('data.csv')
 
 def print_data(df: pd.DataFrame):
