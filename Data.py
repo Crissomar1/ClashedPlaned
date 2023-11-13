@@ -29,6 +29,10 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df['fatalities'] = df['fatalities'].apply(lambda x: x.split(' ')[0])
     #delete the first column
     df = df.drop(columns=[1])
+    #delete no relevant columns
+    df = df.drop(['Flight_no'], axis=1)
+    df = df.drop(['Registration'], axis=1)
+    df = df.drop(['Summary'], axis=1)
     return df
 
 

@@ -160,14 +160,17 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Statistical test
+- [x] Data obtention
+- [ ] Data Cleaning
+- [ ] Descriptive Statistics
+- [ ] Data Visualization
+- [ ] Statistic Test
+- [ ] Linear Models
 - [ ] Forecasting
-- [ ] Data mining
-    - [ ] Anomaly Detection
-    - [ ] Clustering
-    - [ ] Labeling
-    - [ ] Regression
-    - [ ] Summarization
+- [ ] Data classification
+- [ ] Data clustering
+- [ ] Text analysis
+- [ ] RNN
 
 ## Explora
 
