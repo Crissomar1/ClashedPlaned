@@ -9,7 +9,7 @@ import opendatasets as od
 
 
 
-def get_data():
+def get_data() -> pd.DataFrame:
     response = requests.get('https://raw.githubusercontent.com/Crissomar1/ClashedPlaned/Tarea-1/Data/planecrashinfo_20181121001952.csv')
     #its a raw html so we need to decode it
     data = response.content.decode('utf-8')
@@ -23,8 +23,17 @@ def print_data(df: pd.DataFrame):
 def save_data(df: pd.DataFrame):
     df.to_csv('data.csv')
 
+def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+    #leave column 11 and 12 just with the first number
+    df['aboard'] = df['aboard'].apply(lambda x: x.split(' ')[0])
+    df['fatalities'] = df['fatalities'].apply(lambda x: x.split(' ')[0])
+    #delete the first column
+    df = df.drop(columns=[1])
+    return df
+
+
 def main():
-    data = get_data()
+    data = clean_data(get_data())
     print_data(data)
     save_data(data)
 
