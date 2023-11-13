@@ -14,7 +14,7 @@ def get_data() -> pd.DataFrame:
     #its a raw html so we need to decode it
     data = response.content.decode('utf-8')
     #we need to convert it to a pandas dataframe
-    df = pd.read_csv(io.StringIO(data))
+    df = pd.read_csv(io.StringIO(data),index_col=0)
     return df
 
 def print_data(df: pd.DataFrame):
@@ -27,12 +27,10 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     #leave column 11 and 12 just with the first number
     df['aboard'] = df['aboard'].apply(lambda x: x.split(' ')[0])
     df['fatalities'] = df['fatalities'].apply(lambda x: x.split(' ')[0])
-    #delete the first column
-    df = df.drop(columns=[1])
-    #delete no relevant columns
-    df = df.drop(['Flight_no'], axis=1)
-    df = df.drop(['Registration'], axis=1)
-    df = df.drop(['Summary'], axis=1)
+    df = df.drop(['flight_no'], axis=1)
+    df = df.drop(['registration'], axis=1)
+    df = df.drop(['summary'], axis=1)
+    
     return df
 
 
