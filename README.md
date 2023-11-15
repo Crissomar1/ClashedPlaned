@@ -161,7 +161,7 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 ## Roadmap
 
 - [x] Data obtention
-- [ ] Data Cleaning
+- [x] Data Cleaning
 - [ ] Descriptive Statistics
 - [ ] Data Visualization
 - [ ] Statistic Test
