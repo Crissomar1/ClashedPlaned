@@ -101,8 +101,8 @@ def stats(df: pd.DataFrame):
 
 def main():
     data = clean_data(get_data2())
-    #stats(data)
-    print_data(data)
+    stats(data)
+    #print_data(data)
     save_data(data)
 
 main()
