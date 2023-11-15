@@ -162,7 +162,7 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 
 - [x] Data obtention
 - [x] Data Cleaning
-- [ ] Descriptive Statistics
+- [x] Descriptive Statistics
 - [ ] Data Visualization
 - [ ] Statistic Test
 - [ ] Linear Models
