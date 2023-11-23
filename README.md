@@ -147,9 +147,9 @@ _Instalacion del codigo._
 Siemplemente corre el programa y espera a que termine, el programa se encargara de todo lo demas.
 Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes aereos ademas de archivos con la informacion procesada.
 
-![Screen Shot 1](images/ss1.png)
+![Screen Shot 1](Tarea-1/Datos%20descargados.png)
 
-![Screen Shot 2](images/ss2.png)
+![Screen Shot 2](Tarea-2/Cleaned.png)
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
