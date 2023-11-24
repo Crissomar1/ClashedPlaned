@@ -324,17 +324,32 @@ def forecast(df: pd.DataFrame):
     plt.title('Regresion lineal dias de diciembre')
     plt.savefig('Tarea-7/forecast.png')
 
-    
+def clasification(df: pd.DataFrame):
+    #clasificar los accidentes en 3 categorias: 0-50, 50-100, 100+ de fallecidos
+    #agregar columna de clasificacion
+    df['classification'] = df['fatalities'].apply(lambda x: '0-50' if x <= 50 else ('50-100' if x <= 100 else '100+'))
+    #numero de accidentes por clasificacion
+    df_per_classification = df.groupby(['classification'])['fatalities'].agg(['count'])
+    df_per_classification = df_per_classification.reset_index()
+    print("CLASIFICACION DE ACCIDENTES POR FALLECIDOS")
+    print(tabulate(df_per_classification, headers=df_per_classification.columns, tablefmt='orgtbl'))
+    #plotear
+    df_per_classification.plot(y = 'count',kind="bar", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por clasificacion')
+    plt.savefig('Tarea-8/clasificacion_de_accidentes_por_fallecidos.png')
+    plt.close()
+
 
 def main():
-    #data = clean_data(get_data2())
+    #data = get_data() #descargala
+    #data = clean_data(get_data2()) #limpia los datos ya descargados
     #save_data(data)
-    data = get_data3() #ya limpia
+    data = get_data3() #apartir de los datos ya limpios
     #stats(data)
     #print_data(data)
     #plot_data(data)
     #nova_test(data)
     #regresion_test(data)
-    forecast(data)
+    #forecast(data)
+    clasification(data)
 
 main()

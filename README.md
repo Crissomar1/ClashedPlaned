@@ -173,6 +173,8 @@ Reject H0
 ![Screen Shot 6](Tarea-7/forecast.png)
 * no se pudo hacer un pronostico pues cada año tiene un numero diferente de accidentes, por lo que no se puede hacer un pronostico de un año a otro.
 
+![Screen Shot 7](Tarea-8/clasificacion_de_accidentes_por_fallecidos.png)
+
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -189,7 +191,7 @@ Reject H0
 - [x] Statistic Test
 - [x] Linear Models
 - [x] Forecasting
-- [ ] Data classification
+- [x] Data classification
 - [ ] Data clustering
 - [ ] Text analysis
 - [ ] RNN
@@ -202,7 +204,8 @@ Reject H0
 * [Tarea 4: Visuales](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-4)
 * [Tarea 5: Prueba](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-5)
 * [Tarea 6: regresion lineal](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-6)
-* [Tarea 6: intento de pronostico](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-7)
+* [Tarea 7: intento de pronostico](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-7)
+* [Tarea 8: Clasificacion](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-8)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
