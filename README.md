@@ -175,6 +175,8 @@ Reject H0
 
 ![Screen Shot 7](Tarea-8/clasificacion_de_accidentes_por_fallecidos.png)
 
+**Nota:** Apartir de aqui no encontre que datos podrias clasificar seguire explorando, en cuanto a datos encontrados se exploraran varios sucesos globales como el 911, la primera y segunda guerra mundial, la gran deoresion, etc. (podria actualizar los datos para incluir la pandemia del covid-19)
+
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -206,6 +208,7 @@ Reject H0
 * [Tarea 6: regresion lineal](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-6)
 * [Tarea 7: intento de pronostico](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-7)
 * [Tarea 8: Clasificacion](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-8)
+* [Tarea 9: Clustering](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-9)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
