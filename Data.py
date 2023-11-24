@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from tabulate import tabulate
 import opendatasets as od
+import matplotlib.pyplot as plt
 
 
 
@@ -216,11 +217,39 @@ def stats(df: pd.DataFrame):
     df_per_type = df.groupby(['ac_type'])['fatalities'].agg(['sum', 'count', 'mean', 'max', 'min'])
     print(tabulate(df_per_type, headers=df_per_type.columns, tablefmt='orgtbl'))
 
+def plot_data(df: pd.DataFrame):
+    #accidentes por año
+    df_per_year = df.groupby(['year'])['fatalities'].agg(['count'])
+    df_per_year.plot(y = 'count',kind="bar", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por año')
+    plt.savefig('Tarea-4/accidentes_por_año.png')
+    plt.close()
+    #accidentes por mes
+    df_per_month = df.groupby(['month'])['fatalities'].agg(['count'])
+    df_per_month.plot(y = 'count',kind="bar", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por mes')
+    plt.savefig('Tarea-4/accidentes_por_mes.png')
+    plt.close()
+    #accidentes por tipo de aeronave
+    df_per_type = df.groupby(['ac_type'])['fatalities'].agg(['count'])
+    #ordenar por count
+    df_per_type = df_per_type.sort_values(by=['count'], ascending=False)
+    df_per_type = df_per_type.head(10)
+    df_per_type.plot(y = 'count',kind="bar", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por tipo de aeronave')
+    plt.savefig('Tarea-4/accidentes_por_tipo_de_aeronave.png')
+    plt.close()
+    #accidentes por pais
+    df_per_country = df.groupby(['country'])['fatalities'].agg(['count'])
+    #ordenar por count
+    df_per_country = df_per_country.sort_values(by=['count'], ascending=False)
+    df_per_country = df_per_country.head(30)
+    df_per_country.plot(y = 'count',kind="bar", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por pais')
+    plt.savefig('Tarea-4/accidentes_por_pais.png')
+    plt.close()
 
 def main():
     data = clean_data(get_data2())
-    stats(data)
+    #stats(data)
     #print_data(data)
+    plot_data(data)
     save_data(data)
 
 main()

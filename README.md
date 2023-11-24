@@ -152,8 +152,9 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 ![Screen Shot 2](Tarea-2/Cleaned.png)
 
 ![Screen Shot 3](Tarea-3/Stats.png)
-mira https://github.com/Crissomar1/ClashedPlaned/blob/Tarea-3/Tarea-3/Stats.txt
+* mira https://github.com/Crissomar1/ClashedPlaned/blob/Tarea-3/Tarea-3/Stats.txt
 
+![Screen Shot 4](Tarea-4/accidentes_por_mes.png)
 
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
@@ -168,7 +169,7 @@ mira https://github.com/Crissomar1/ClashedPlaned/blob/Tarea-3/Tarea-3/Stats.txt
 - [x] Data obtention
 - [x] Data Cleaning
 - [x] Descriptive Statistics
-- [ ] Data Visualization
+- [x] Data Visualization
 - [ ] Statistic Test
 - [ ] Linear Models
 - [ ] Forecasting
