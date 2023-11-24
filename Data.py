@@ -269,13 +269,38 @@ def nova_test(df: pd.DataFrame):
     else:
         print("Fail to reject H0")
     
+def regresion_test(df: pd.DataFrame):
+    #probar a cada año si hay una tendencia en el numero de accidentes
+    #numero de accidentes por año y mes
+    df_per_year = df.groupby(['year'])['fatalities'].agg(['count'])
+    df_per_year = df_per_year.reset_index()
+    #antes del 2000
+    df_per_year = df_per_year.loc[df_per_year['year'] < 2000]
+    #regresion lineal cuardando valores para plotearlos
+    print("REGRESION LINEAL")   
+    print(tabulate(df_per_year, headers=df_per_year.columns, tablefmt='orgtbl'))
+    model = sm.OLS(df_per_year['count'], df_per_year['year']).fit()
+    coef = pd.read_html(model.summary().tables[1].as_html(),header=0,index_col=0)[0]['coef'][0]
+    print(model.summary())
+    plt.scatter(df_per_year['year'], df_per_year['count'])
+    plt.plot(df_per_year['year'], df_per_year['count'], color='red')
+    #trazar la linea de regresion
+    plt.plot(df_per_year['year'], coef*df_per_year['year'], color='blue')
+    #promedio
+    plt.axhline(y=df_per_year['count'].mean(), color='green', linestyle='-')
+    plt.xlabel('Year')
+    plt.ylabel('Count')
+    plt.title('Regresion lineal años antes del 2000')
+    plt.savefig('Tarea-6/regresion_lineal_antes_del_2000.png')
+    plt.close()
 
 def main():
     data = clean_data(get_data2())
     #stats(data)
     #print_data(data)
     #plot_data(data)
-    nova_test(data)
+    #nova_test(data)
+    regresion_test(data)
     save_data(data)
 
 main()

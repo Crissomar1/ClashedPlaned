@@ -168,6 +168,7 @@ Residual  62655.205246  106.0        NaN           NaN
 Reject H0
 '''
 
+![Screen Shot 5](Tarea-6/regresion_lineal_antes_del_2000.png)
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
@@ -183,7 +184,7 @@ Reject H0
 - [x] Descriptive Statistics
 - [x] Data Visualization
 - [x] Statistic Test
-- [ ] Linear Models
+- [x] Linear Models
 - [ ] Forecasting
 - [ ] Data classification
 - [ ] Data clustering
@@ -196,7 +197,8 @@ Reject H0
 * [Tarea 2: Limpieza](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-2)
 * [Tarea 3: Estadisticas](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-3)
 * [Tarea 4: Visuales](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-4)
-* [Tarea 4: Prueba](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-5)
+* [Tarea 5: Prueba](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-5)
+* [Tarea 6: regresion lineal](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-6)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
