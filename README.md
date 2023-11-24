@@ -156,6 +156,18 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 
 ![Screen Shot 4](Tarea-4/accidentes_por_mes.png)
 
+'''
+ANOVA TEST
+H0: mu_2000 = mu_2001
+H1: mu_2000 != mu_2001
+alpha = 0.05
+p-value:
+                sum_sq     df          F        PR(>F)
+year      22313.563272    1.0  37.750059  1.432003e-08
+Residual  62655.205246  106.0        NaN           NaN
+Reject H0
+'''
+
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
@@ -170,7 +182,7 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 - [x] Data Cleaning
 - [x] Descriptive Statistics
 - [x] Data Visualization
-- [ ] Statistic Test
+- [x] Statistic Test
 - [ ] Linear Models
 - [ ] Forecasting
 - [ ] Data classification
@@ -184,6 +196,7 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 * [Tarea 2: Limpieza](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-2)
 * [Tarea 3: Estadisticas](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-3)
 * [Tarea 4: Visuales](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-4)
+* [Tarea 4: Prueba](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-5)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

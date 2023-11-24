@@ -6,7 +6,9 @@ import pandas as pd
 from tabulate import tabulate
 import opendatasets as od
 import matplotlib.pyplot as plt
-
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm
 
 
 
@@ -245,11 +247,35 @@ def plot_data(df: pd.DataFrame):
     plt.savefig('Tarea-4/accidentes_por_pais.png')
     plt.close()
 
+
+def nova_test(df: pd.DataFrame):
+    #por ejemplo comparar el año 2000 con el 2001 y ver si hay diferencia significativa en el numero de accidentes
+    #numero de accidentes por año
+    df_per_year = df.groupby(['year'])['fatalities'].agg(['count'])
+    df_per_year = df_per_year.reset_index()
+    #2000
+    df_2000 = df_per_year.loc[df_per_year['year'] == 2000]
+    #2001
+    df_2001 = df_per_year.loc[df_per_year['year'] == 2001]
+    #anova test
+    print("ANOVA TEST")
+    print("H0: mu_2000 = mu_2001")
+    print("H1: mu_2000 != mu_2001")
+    print("alpha = 0.05")
+    print("p-value: ")
+    print(anova_lm(ols('count ~ year', data=df_per_year).fit(), typ=2))
+    if anova_lm(ols('count ~ year', data=df_per_year).fit(), typ=2).values[0][3] < 0.05:
+        print("Reject H0")
+    else:
+        print("Fail to reject H0")
+    
+
 def main():
     data = clean_data(get_data2())
     #stats(data)
     #print_data(data)
-    plot_data(data)
+    #plot_data(data)
+    nova_test(data)
     save_data(data)
 
 main()
