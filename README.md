@@ -183,6 +183,7 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 * [Tarea 1: Base de Datos](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-1)
 * [Tarea 2: Limpieza](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-2)
 * [Tarea 3: Estadisticas](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-3)
+* [Tarea 4: Visuales](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-4)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
