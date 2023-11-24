@@ -25,6 +25,11 @@ def get_data2() -> pd.DataFrame:
     df = pd.read_csv('Data/planecrashinfo_20181121001952.csv',index_col=0)
     return df
 
+def get_data3() -> pd.DataFrame:
+    #read from file in "Data" folder
+    df = pd.read_csv('data.csv',index_col=0)
+    return df
+
 def print_data(df: pd.DataFrame):
     print(tabulate(df, headers=df.columns, tablefmt='orgtbl'))
 
@@ -294,13 +299,42 @@ def regresion_test(df: pd.DataFrame):
     plt.savefig('Tarea-6/regresion_lineal_antes_del_2000.png')
     plt.close()
 
+def forecast(df: pd.DataFrame):
+    #cada diciembre predecir el numero de accidentes para el año siguiente
+    #numero de accidentes por dia de diciembre
+    df_per_month = df.groupby(['month','day'])['fatalities'].agg(['count'])
+    df_per_month = df_per_month.reset_index()
+    #diciembre
+    df_per_day = df_per_month.loc[df_per_month['month'] == 'December']
+    #regresion lineal cuardando valores para plotearlos
+    print("FORECAST")
+    print(tabulate(df_per_day, headers=df_per_day.columns, tablefmt='orgtbl'))
+    model = sm.OLS(df_per_day['count'], df_per_day['day']).fit()
+    coef = pd.read_html(model.summary().tables[1].as_html(),header=0,index_col=0)[0]['coef'][0]
+    print(model.summary())
+    plt.scatter(df_per_day['day'], df_per_day['count'])
+    plt.plot(df_per_day['day'], df_per_day['count'], color='red')
+    #trazar la linea de regresion mas sombra de prediccion
+    plt.plot(df_per_day['day'], coef*df_per_day['day'], color='blue')
+    plt.fill_between(df_per_day['day'], coef*df_per_day['day'] - 1.96*df_per_day['count'].std(), coef*df_per_day['day'] + 1.96*df_per_day['count'].std(), alpha=0.2)
+    #promedio
+    plt.axhline(y=df_per_day['count'].mean(), color='green', linestyle='-')
+    plt.xlabel('Day')
+    plt.ylabel('Count')
+    plt.title('Regresion lineal dias de diciembre')
+    plt.savefig('Tarea-7/forecast.png')
+
+    
+
 def main():
-    data = clean_data(get_data2())
+    #data = clean_data(get_data2())
+    #save_data(data)
+    data = get_data3() #ya limpia
     #stats(data)
     #print_data(data)
     #plot_data(data)
     #nova_test(data)
-    regresion_test(data)
-    save_data(data)
+    #regresion_test(data)
+    forecast(data)
 
 main()
