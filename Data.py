@@ -194,26 +194,25 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
 def stats(df: pd.DataFrame):
     
-    #total number of crashes
-    print("Total number of crashes: ", len(df))
-    #total number of fatalities (? in data doesnt count)
-    print("Total number of fatalities: ", df['fatalities'].sum())
+    #numero de crashes por año en español
+    print("Numero de accidentes por año: ", len(df))
+    print("Total de fallecidos: ", df['fatalities'].sum())
     #total number of fatalities per year
-    print("Fatalities per year: ")
+    print("fallecidos por año: ")
     df_per_year = df.groupby(['year'])['fatalities'].agg(['sum', 'count', 'mean', 'max', 'min'])
     print(tabulate(df_per_year, headers=df_per_year.columns, tablefmt='orgtbl'))
     #total number of fatalities per month
-    print("fatalities per month: ")
+    print("fallecidos por mes: ")
     df_per_month = df.groupby(['month'])['fatalities'].agg(['sum', 'count', 'mean', 'max', 'min'])
     print(tabulate(df_per_month, headers=df_per_month.columns, tablefmt='orgtbl'))
-    #year with most fatalities
-    print("Year with most fatalities: ")
+    #year with most fatalities epañol
+    print("Año con mas fallecidos: ")
     print(df.groupby(['year'])['fatalities'].sum().idxmax())
-    #year with least fatalities
-    print("Year with least fatalities: ")
+    #year with least fatalities epañol
+    print("Año con menos fallecidos: ")
     print(df.groupby(['year'])['fatalities'].sum().idxmin())
     #por aircraft type
-    print("per AC:")
+    print("Fallecidos por aereonave:")
     df_per_type = df.groupby(['ac_type'])['fatalities'].agg(['sum', 'count', 'mean', 'max', 'min'])
     print(tabulate(df_per_type, headers=df_per_type.columns, tablefmt='orgtbl'))
 

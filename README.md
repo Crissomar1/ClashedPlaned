@@ -151,6 +151,11 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 
 ![Screen Shot 2](Tarea-2/Cleaned.png)
 
+![Screen Shot 3](Tarea-3/Stats.png)
+mira https://github.com/Crissomar1/ClashedPlaned/blob/Tarea-3/Tarea-3/Stats.txt
+
+
+
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -176,6 +181,7 @@ Generara un archivo llamado "CrashPlaned.csv" con los datos de los accidentes ae
 
 * [Tarea 1: Base de Datos](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-1)
 * [Tarea 2: Limpieza](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-2)
+* [Tarea 3: Estadisticas](https://github.com/Crissomar1/ClashedPlaned/tree/Tarea-3)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
