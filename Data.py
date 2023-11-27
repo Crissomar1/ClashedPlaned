@@ -339,19 +339,16 @@ def clasification(df: pd.DataFrame):
     plt.close()
 
 def clustering(df: pd.DataFrame):
-    #clusterizar segun fechas y numero de fallecidos de los ultimos 20 años
-    #despues de 2000
-    df = df.loc[df['year'] > 2000]
-    #mes a numero
-    df['month'] = df['month'].apply(lambda x: 1 if x == 'January' else (2 if x == 'February' else (3 if x == 'March' else (4 if x == 'April' else (5 if x == 'May' else (6 if x == 'June' else (7 if x == 'July' else (8 if x == 'August' else (9 if x == 'September' else (10 if x == 'October' else (11 if x == 'November' else 12)))))))))))
-    #plotear segun x = (mes y dia) y = numero de accidentes
-    df_per_month = df.groupby(['month','day'])['fatalities'].agg(['count'])
-    df_per_month = df_per_month.reset_index()
-    print("CLUSTERING")
-    print(tabulate(df_per_month, headers=df_per_month.columns, tablefmt='orgtbl'))
-    #plotear
-    df_per_month.plot(y = 'count',kind="bar", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por mes y dia')
-    plt.savefig('Tarea-9/clustering.png')
+    #clusterizar la hora del accidente y numeros de fatalities
+    df_per_time = df.groupby(['time','fatalities']).all()
+    df_per_time = df_per_time.reset_index()
+    #borrar los que no tienen hora
+    df_per_time = df_per_time.loc[df_per_time['time'] != '']
+    #convertir a hora
+    df_per_time['time'] = pd.to_datetime(df_per_time['time'], format='%H:%M')
+    #plotear los datos
+    df_per_time.plot(x='time', y = 'fatalities',kind="scatter", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por hora')
+    plt.savefig('Tarea-9/accidentes_por_hora.png')
     plt.close()
 
 def main():
