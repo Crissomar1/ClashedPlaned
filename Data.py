@@ -346,8 +346,19 @@ def clustering(df: pd.DataFrame):
     df_per_time = df_per_time.loc[df_per_time['time'] != '']
     #convertir a hora
     df_per_time['time'] = pd.to_datetime(df_per_time['time'], format='%H:%M')
-    #plotear los datos
-    df_per_time.plot(x='time', y = 'fatalities',kind="scatter", legend=False, figsize=(32,18),fontsize=15, title='Numero de accidentes por hora')
+    unique_times = df_per_time['time'].unique()
+    num_times = len(unique_times)
+    
+
+    #numerar las horas para poder clusterizar
+    labels = range(0, len(df_per_time['time']))
+    cmap = plt.cm.rainbow
+    for i, time in enumerate(df_per_time['time']):
+        filtered = df_per_time[(df_per_time['time'] == time)]
+        plt.scatter(time, df_per_time['fatalities'][i], color=cmap(labels[i]))
+    plt.xlabel('Hora')
+    plt.ylabel('Fallecidos')
+    plt.title('Accidentes por hora')
     plt.savefig('Tarea-9/accidentes_por_hora.png')
     plt.close()
 
