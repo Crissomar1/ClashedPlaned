@@ -41,8 +41,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df['aboard'] = df['aboard'].apply(lambda x: x.split(' ')[0])
     df['fatalities'] = df['fatalities'].apply(lambda x: x.split(' ')[0])
     df = df.drop(['flight_no'], axis=1)
-    df = df.drop(['registration'], axis=1)
-    df = df.drop(['summary'], axis=1)
+    df = df.drop(['registration'], axis=1)  
     
     df['time'] = df['time'].apply(lambda x: x.replace('"',':'))
     df['time'] = df['time'].apply(lambda x: x.replace(';',':'))
@@ -299,6 +298,8 @@ def regresion_test(df: pd.DataFrame):
     plt.savefig('Tarea-6/regresion_lineal_antes_del_2000.png')
     plt.close()
 
+
+
 def forecast(df: pd.DataFrame):
     #cada diciembre predecir el numero de accidentes para el año siguiente
     #numero de accidentes por dia de diciembre
@@ -362,6 +363,129 @@ def clustering(df: pd.DataFrame):
     plt.savefig('Tarea-9/accidentes_por_hora.png')
     plt.close()
 
+
+
+def d_por_año(df: pd.DataFrame):
+    #accidentes por año en español, horizontal bar, color rojo, titulo en español, leyenda en español
+    # Tamaño de letra 50 
+    # solo 5 tics en el eje x y y
+    df_per_year = df.groupby(['year'])['fatalities'].agg(['count'])
+    df_per_year = df_per_year.reset_index()
+    plt.figure(facecolor='blue')
+    ax=plt.axes()
+    ax.set_facecolor("blue")
+    df_per_year.plot(
+        x = 'year',y = 'count',kind="barh", 
+        legend=False, figsize=(32,18),fontsize=25,
+        title='Numero de accidentes por año',
+        color='red',
+        xticks=[0, 25, 50, 75],
+        yticks=[1900, 1925, 1950, 1975, 2000, 2025],
+        ylim=(1950, 2000)
+        )
+    plt.xlabel('Numero de accidentes',fontdict={'fontsize': 50})
+    plt.ylabel('Año',fontdict={'fontsize': 50})
+    plt.title('Numero de accidentes por año',fontdict={'fontsize': 50})
+    
+    plt.savefig('PIA/accidentes_por_año.png')
+    plt.close()
+
+def d_por_tipo(df: pd.DataFrame):
+    #segun el tipo de aeronave, numero de accidentes, pie chart, titulo en español, leyenda en español
+    # Tamaño de letra 50
+    df_per_type = df.groupby(['ac_type'])['fatalities'].agg(['count'])
+    #ordenar por count
+    df_per_type = df_per_type.sort_values(by=['count'], ascending=False)
+    df_per_type = df_per_type.head(15)
+    plt.figure(facecolor='blue')
+    ax=plt.axes()
+    ax.set_facecolor("blue")
+    df_per_type.plot(
+        y = 'count',kind="pie", 
+        legend=False, figsize=(32,18),fontsize=25,
+        title='Numero de accidentes por tipo de aeronave',
+        )
+    plt.title('Top 15 de accidentes por tipo de aeronave',fontdict={'fontsize': 50})
+    plt.legend(loc='upper right', prop={'size': 25})
+    plt.savefig('PIA/accidentes_por_tipo_de_aeronave.png')
+    plt.close()
+
+def d_militar_pie(df: pd.DataFrame):
+    #segun el tipo de aeronave, numero de accidentes, pie chart, titulo en español, leyenda en español
+    # Tamaño de letra 50
+    df_per_type = df.groupby(['operator'])['fatalities'].agg(['count'])
+    df_per_type = df_per_type.reset_index()
+    #si es militar o no (el militar incluye military militar, fuerza aerea, air force, etc)
+    df_per_type['military'] = df_per_type['operator'].apply(lambda x: 'militar' if 'military' in x.lower() or 'fuerza aerea' in x.lower() or 'air force' in x.lower() or 'army' in x.lower() or 'navy' in x.lower() or 'marines' in x.lower() or 'fuerza aérea' in x.lower() else 'civil')
+    #sumar militar y civil
+    df_per_type = df_per_type.groupby(['military'])['count'].agg(['sum'])
+    plt.figure(facecolor='blue')
+    ax=plt.axes()
+    ax.set_facecolor("blue")
+    df_per_type.plot(
+        y = 'sum',kind="pie", 
+        legend=False, figsize=(32,18),fontsize=25,
+        title='Numero de accidentes por tipo de aeronave',
+        )
+    plt.title('Militar o civil',fontdict={'fontsize': 50})
+    plt.legend(loc='upper right', prop={'size': 25})
+    plt.savefig('PIA/militar_o_civil.png')
+    plt.close()
+
+def d_supervivientes(df: pd.DataFrame):
+    #agregar porcentaje de supervivientes a cada accidente
+    df['survivors'] = df['aboard'] - df['fatalities']
+    #agregar columna de porcentaje
+    df['survivors_percentage'] = df['survivors'] / df['aboard']
+    #clasificar media de porcentaje por año
+    df_per_year = df.groupby(['year'])['survivors_percentage'].agg(['mean'])
+    df_per_year = df_per_year.reset_index()
+    #plotear en raibow
+    cmap = plt.cm.rainbow
+    for i, year in enumerate(df_per_year['year']):
+        plt.scatter(year, df_per_year['mean'][i], color=cmap(i))
+    plt.xlabel('Año',fontdict={'fontsize': 25   })
+    plt.ylabel('Porcentaje',fontdict={'fontsize': 25})
+    plt.title('Media de supervivientes',fontdict={'fontsize': 25})
+    plt.savefig('PIA/porcentaje_de_supervivientes_por_año.png')
+    plt.close()
+
+def regresion_test2(df: pd.DataFrame):
+    #probar a cada año si hay una tendencia en el numero de accidentes
+    #numero de accidentes por año y mes
+    df_per_year = df.groupby(['year'])['fatalities'].agg(['count'])
+    df_per_year = df_per_year.reset_index()
+    #antes del 2000
+    df_per_year = df_per_year.loc[df_per_year['year'] >= 2000]
+    #regresion lineal cuardando valores para plotearlos
+    print("REGRESION LINEAL")   
+    print(tabulate(df_per_year, headers=df_per_year.columns, tablefmt='orgtbl'))
+    model = sm.OLS(df_per_year['count'], df_per_year['year']).fit()
+    coeficiente = pd.read_html(model.summary().tables[1].as_html(),header=0,index_col=0)[0]['coef'][0]
+    print(model.summary())
+    plt.scatter(df_per_year['year'], df_per_year['count'])
+    plt.plot(df_per_year['year'], df_per_year['count'], color='red')
+    #trazar la linea de regresion
+    plt.plot(df_per_year['year'], coeficiente*df_per_year['year'], color='blue')
+    #promedio
+    plt.axhline(y=df_per_year['count'].mean(), color='green', linestyle='-')
+    plt.xlabel('Año')
+    plt.ylabel('Accidentes')
+    plt.title('Regresion lineal siglo XXI')
+    plt.savefig('PIA/regresion_lineal_antes_del_2000.png')
+    plt.close()
+
+def diagramas(df: pd.DataFrame):
+    d_por_año(df)
+    d_por_tipo(df)
+    d_militar_pie(df)
+    d_supervivientes(df)
+    regresion_test2(df)
+    
+    
+
+
+
 def main():
     #data = get_data() #descargala
     #data = clean_data(get_data2()) #limpia los datos ya descargados
@@ -374,6 +498,7 @@ def main():
     #regresion_test(data)
     #forecast(data)
     #clasification(data)
-    clustering(data)
+    #clustering(data)
+    diagramas(data)
 
 main()
